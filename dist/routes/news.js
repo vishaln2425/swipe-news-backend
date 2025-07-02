@@ -11,6 +11,7 @@ const imageConverter_1 = require("../utils/imageConverter");
 const router = express_1.default.Router();
 const PUBLIC_DIR = path_1.default.join(__dirname, '../../public');
 const CONVERTED_DIR = path_1.default.join(PUBLIC_DIR, 'converted');
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 router.get('/', async (req, res) => {
     try {
         const convertedNews = await Promise.all(dummyNews_1.news.map(async (item) => {
@@ -24,7 +25,7 @@ router.get('/', async (req, res) => {
             }
             return {
                 ...item,
-                imageUrl: `http://localhost:3000/public/converted/${webpFileName}`
+                imageUrl: `${BASE_URL}/public/converted/${webpFileName}`
             };
         }));
         res.json(convertedNews);

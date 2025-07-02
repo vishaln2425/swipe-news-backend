@@ -7,6 +7,7 @@ import { convertToWebP } from '../utils/imageConverter';
 const router = express.Router();
 const PUBLIC_DIR = path.join(__dirname, '../../public');
 const CONVERTED_DIR = path.join(PUBLIC_DIR, 'converted');
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 
 router.get('/', async (req, res) => {
   try {
@@ -23,7 +24,7 @@ router.get('/', async (req, res) => {
 
       return {
         ...item,
-        imageUrl: `http://localhost:3000/public/converted/${webpFileName}`
+        imageUrl: `${BASE_URL}/public/converted/${webpFileName}`
       };
     }));
 
